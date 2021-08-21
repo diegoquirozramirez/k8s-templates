@@ -27,3 +27,5 @@ $ kubectl exec -it <name_pod> -c <name_container> (-- sh, /bin/bash, bash, sh)
 $ kubectl logs -f <name_pod> -c <name_container>
 ### Aditional ::: curl not exists
 $ apk add -U curl
+### Filter pods with Labels
+$ kubectl get pods -l name=<name_config_in_tag_label>

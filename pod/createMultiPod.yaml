@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: podtest2
+  name: podtest2 #nombre del pod
+  namespace: default
+spec: # qur contenedor se desea crear
+  containers:
+  - image: httpd:alpine
+    imagePullPolicy: IfNotPresent
+    name: cont2 # nombre del contenedor (puede ser dif. nombre del pod)
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: podtest3
+  name: podtest3 #nombre del pod
+  namespace: default
+spec: # qur contenedor se desea crear
+  containers:
+  - image: nginx:alpine
+    imagePullPolicy: IfNotPresent
+    name: cont3 # nombre del contenedor (puede ser dif. nombre del pod)

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-dos
+  namespace: default
+spec:
+  containers: # los contenedores no pueden tener el mismo puerto en uso
+    - name: cont-dos2
+      image: python:3.6-alpine
+      command: ['sh', '-c', 'echo contDos2 > index.html && python -m http.server 8082']
+    - name: cont-dos3
+      image: python:3.6-alpine
+      command: ['sh', '-c', 'echo contDos3 > index.html && python -m http.server 8083']
+

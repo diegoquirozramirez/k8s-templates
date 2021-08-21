@@ -21,3 +21,9 @@ $ kubectl port-forward <name_pod> <port_host>:<port_container>
 $ kubectl exec -it <name_pod> (-- sh, /bin/bash, bash, sh)
 ### Get List of Resource API k8s
 $ kubectl api-resources
+### Go to a container especific inside Pod
+$ kubectl exec -it <name_pod> -c <name_container> (-- sh, /bin/bash, bash, sh)
+### Get logs a container especific inside Pod
+$ kubectl logs -f <name_pod> -c <name_container>
+### Aditional ::: curl not exists
+$ apk add -U curl

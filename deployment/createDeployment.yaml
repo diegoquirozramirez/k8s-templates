@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+  annotations:
+    kubernetes.io/change-cause: "Correccion del nombre y tag de la imagen del contenedor"
+spec:
+  revisionHistoryLimit: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: python:3.6-alpine
+        command: ['sh', '-c', 'echo contDos2 > index.html && python -m http.server 8084']
+        ports:
+        - containerPort: 8082

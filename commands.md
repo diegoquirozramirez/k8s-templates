@@ -25,9 +25,26 @@ $ kubectl api-resources
 $ kubectl exec -it <name_pod> -c <name_container> (-- sh, /bin/bash, bash, sh)
 ### Get logs a container especific inside Pod
 $ kubectl logs -f <name_pod> -c <name_container>
-### Aditional ::: curl not exists
-$ apk add -U curl
 ### Filter pods with Labels
 $ kubectl get pods -l name=<name_config_in_tag_label>
 
 #### REPLICA SET | NIVEL : 2 ####
+### DEPLOYMENT | NIVEL : 3 ####
+### Get RollOut Deployment
+$ kubectl rollout status deploy <name_deployment>
+### Show Lables
+$ kubectl get (pods, rs, deploy) --show-labels
+### Show History Deployment
+$ kubectl rollout history deploy <name_deployment>
+### Show detail change-cause 
+$ kubectl rollout history deploy <name_deployment> --revision=<number_revision>
+### Rollback to version stable
+$ kubectl rollout undo deploy <name_deployment> --to-revision=<number_revision>
+
+#### Aditional ####
+### curl not exists
+$ apk add -U curl
+### filter for custom column
+$ kubectl get pods <name_pod> -o custom-columns=ANNOTATIONS:.metadata.annotations
+### add command in apply in change-cause
+$ kubectl apply -f <file_name.yaml> --record

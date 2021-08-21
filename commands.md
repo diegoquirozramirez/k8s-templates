@@ -1,4 +1,4 @@
-#### POD ####
+#### POD | NIVEL: 1 ####
 ### Create Simple Pod
 $ kubectl create <name_pod> --image=<image_name>:<tag_name> --port=<port_number>
 ### Get logs of Pod
@@ -29,3 +29,5 @@ $ kubectl logs -f <name_pod> -c <name_container>
 $ apk add -U curl
 ### Filter pods with Labels
 $ kubectl get pods -l name=<name_config_in_tag_label>
+
+#### REPLICA SET | NIVEL : 2 ####

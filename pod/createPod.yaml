@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: podtest2
+  name: podtest2
+  namespace: default
+spec:
+  containers:
+  - image: httpd:alpine
+    imagePullPolicy: IfNotPresent
+    name: podtest2

@@ -41,6 +41,10 @@ $ kubectl rollout history deploy <name_deployment> --revision=<number_revision>
 ### Rollback to version stable
 $ kubectl rollout undo deploy <name_deployment> --to-revision=<number_revision>
 
+#### SERVICE | NIVEL: 4 ####
+### Port forward Service
+$ kubectl port-forward (svc, service)/<name_service> <port_host>:<port_service>
+
 #### Aditional ####
 ### curl not exists
 $ apk add -U curl
@@ -48,3 +52,7 @@ $ apk add -U curl
 $ kubectl get pods <name_pod> -o custom-columns=ANNOTATIONS:.metadata.annotations
 ### add command in apply in change-cause
 $ kubectl apply -f <file_name.yaml> --record
+### Show more details 
+$ kubectl get <type_object> -o wide
+### List Endpoints of Service
+$ kubectl get endpoints -l app=<value_label>

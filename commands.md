@@ -1,6 +1,6 @@
 #### POD | NIVEL: 1 ####
 ### Create Simple Pod
-$ kubectl create <name_pod> --image=<image_name>:<tag_name> --port=<port_number>
+$ kubectl run <pod_name> --image=<image_name>:<tag_name> --port=<port_number>
 ### Get logs of Pod
 $ kubectl logs -f <name_pod>
 ### Delete One Pod
@@ -56,3 +56,13 @@ $ kubectl apply -f <file_name.yaml> --record
 $ kubectl get <type_object> -o wide
 ### List Endpoints of Service
 $ kubectl get endpoints -l app=<value_label>
+
+
+
+
+#### Sugest
+- Si el runtime de docker (por ejemplo), tiene muchos contenedores en [ps -a], hara que
+cubra los gran parte de recursos y los pods quedaran en estado pending. Si eso ocurre, solucion a nivel local o prueba:
+$ minikube stop && minikube delete
+$ docker rm -f $(docker ps -aq)
+$ reboot

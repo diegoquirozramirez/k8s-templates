@@ -1,0 +1,24 @@
+## RBAC
+comando general: minikube start --vm-driver=none --extra-config=apiserver.authorization-mode=RBAC
+si se trabaja con docker: minikube start driver=docker --extra-config=apiserver.authorization-mode=RBAC
+
+## Create keys and sign
+PASO DESARROLLADOR: openssl genrsa -out diego.key 2048
+PASO DESARROLLADOR: openssl req -new -key diego.key -out diego.csr -subj "/CN=diego/O=dev"
+ADMIN. CLUSTER: sudo openssl x509 -req -in diego.csr -CA /home/diego/.minikube/ca.crt -CAkey /home/diego/.minikube/ca.key -CAcreateserial -out diego.crt -days 500
+openssl x509 -in diego.crt -noout -text
+## el crt se devuelve al DESARROLLADOR
+
+
+## Isolate env
+kubectl config view | grep server
+### para testeo: docker run --rm -it -v $PWD:/test -w /test -v /home/diego/.minikube/ca.crt:/ca.crt -v /usr/bin/kubectl:/usr/bin/kubectl alpine sh
+
+## Configure kubectl for user
+kubectl config set-cluster minikube --server=https://<ip:port> --certificate-authority=/ca.crt
+kubectl config set-credentials diego --client-certificate=diego.crt --client-key=diego.key
+kubectl config set-context diego --cluster=minikube --user=diego --namespace=office
+kubectl config use-context diego
+
+
+

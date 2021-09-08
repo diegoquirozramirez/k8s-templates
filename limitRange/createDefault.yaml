@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    name: dev
+  annotations:
+    message: "Creacion de Namespace para ambiente desarrollo"
+    maintainer: Diego Quiroz Ramirez
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-min-max-demo-lr
+  namespace: dev
+spec:
+  limits:
+  - default:
+      memory: 512Mi
+      cpu: "1"
+    defaultRequest:
+      memory: 256Mi
+      cpu: "0.5"
+    type: Container
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: podtest3
+    name: back
+    env: DESA
+  name: podtest3
+  namespace: dev
+spec:
+  containers:
+  - image: nginx:alpine
+    imagePullPolicy: IfNotPresent
+    name: cont3

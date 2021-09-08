@@ -1,0 +1,3 @@
+Limits: Aumenta el alcance del request no garantizados (ejm, 30Mb ram - 10Mb no garantizados)
+Request: nos dice cuanto vamos a dar a un pod recursos garantizados (ejm: 20Mb ram)
+---- Si se supera la capacidad limite (Limits), el pod puede reiniciarse o eliminarse dependiendo de las reglas de k8s ----

@@ -62,7 +62,7 @@ $ kubectl get endpoints -l app=<value_label>
 
 #### Sugest
 - Si el runtime de docker (por ejemplo), tiene muchos contenedores en [ps -a], hara que
-cubra los gran parte de recursos y los pods quedaran en estado pending. Si eso ocurre, solucion a nivel local o prueba:
+cubra los gran parte de recursos y los pods quedaran en estado pending o cuando se levanta minikube en modo RBAC (dependera de los recursos de tu computador). Si eso ocurre, solucion a nivel local o prueba:
 $ minikube stop && minikube delete
 $ docker rm -f $(docker ps -aq)
 $ reboot

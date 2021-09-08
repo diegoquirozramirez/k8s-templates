@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: env-development
+  labels:
+    name: env-development
+  annotations:
+    message: "Creacion de Namespace para ambiente desarrollo"
+    maintainer: Diego Quiroz Ramirez
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: env-production
+  labels:
+    name: env-production
+  annotations:
+    message: "Creacion de Namespace para ambiente produccion"
+    maintainer: Diego Quiroz Ramirez
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: env-development
+  labels:
+    app: nginx
+  annotations:
+    kubernetes.io/change-cause: "Correccion del nombre y tag de la imagen del contenedor"
+spec:
+  revisionHistoryLimit: 5
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: python:3.6-alpine
+        command: ['sh', '-c', 'echo contDos2 > index.html && python -m http.server 8082']
+        ports:
+        - containerPort: 8082
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-production
+  namespace: env-production
+  labels:
+    app: nginx
+  annotations:
+    kubernetes.io/change-cause: "Correccion del nombre y tag de la imagen del contenedor"
+spec:
+  revisionHistoryLimit: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: python:3.6-alpine
+        command: ['sh', '-c', 'echo contDos2 > index.html && python -m http.server 8082']
+        ports:
+        - containerPort: 8082

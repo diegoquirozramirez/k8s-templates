@@ -1,0 +1,13 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-rol-binding-reader-global-pods
+subjects:
+- kind: User #Group
+  name: diego # Name is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-rol-reader-global-pods
+  apiGroup: rbac.authorization.k8s.io

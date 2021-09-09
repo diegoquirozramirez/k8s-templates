@@ -20,5 +20,15 @@ kubectl config set-credentials diego --client-certificate=diego.crt --client-key
 kubectl config set-context diego --cluster=minikube --user=diego --namespace=office
 kubectl config use-context diego
 
+### Services Account
+1. Despues de aplicar los pasos, Entrar al pod creado
+$ kubectl exec -it <name_pod> -- sh
+$ apk add curl
+2. Inspeccionar token, namespace, ca.crt en /var/run/secrets/kubernetes.io/serviceaccount
+3. Almacenar TOKEN
+$ export TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+4. Consumir endpoint de k8s del api rest (ver docs: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/)
+$ curl -ks  --header "Authorization: Bearer $TOKEN" "https://kubernetes:443/api/v1/{namespace}/default/pods/{pod_name}"
+
 
 

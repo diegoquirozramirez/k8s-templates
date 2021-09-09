@@ -1,13 +1,13 @@
-kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
 metadata:
   name: deployment-manager-binding
   namespace: office
 subjects:
 - kind: User
   name: diego
-  apiGroup: ""
+  apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
   name: diego
-  apiGroup: ""
+  apiGroup: rbac.authorization.k8s.io

@@ -66,3 +66,7 @@ cubra los gran parte de recursos y los pods quedaran en estado pending o cuando 
 $ minikube stop && minikube delete
 $ docker rm -f $(docker ps -aq)
 $ reboot
+
+
+### AWS CONFIG EKS
+$ aws eks --region <region-code> update-kubeconfig --name <cluster_name> --profile <name_profile>

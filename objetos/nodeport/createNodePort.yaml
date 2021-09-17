@@ -36,5 +36,6 @@ spec:
     app: python
   ports:
     - protocol: TCP
-      port: 8080 # puerto del servicio del service
+      port: 80 # puerto del servicio del service
       targetPort: 8082 # puerto del los pods
+      nodePort: 30000 # exponer puerto del services con NodePort

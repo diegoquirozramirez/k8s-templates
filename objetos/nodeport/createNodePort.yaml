@@ -21,6 +21,13 @@ spec:
       - name: python
         image: python:3.6-alpine
         command: ['sh', '-c', 'echo $HOSTNAME > index.html && python -m http.server 8082']
+        resources:
+          limits:
+            cpu: "2"
+            memory: 512Mi
+          requests:
+            cpu: "0.2"
+            memory: 256Mi
         ports:
         - containerPort: 8082
 ---

@@ -1,3 +1,22 @@
 Limits: Aumenta el alcance del request no garantizados (ejm, 30Mb ram - 10Mb no garantizados)
 Request: nos dice cuanto vamos a dar a un pod recursos garantizados (ejm: 20Mb ram)
 ---- Si se supera la capacidad limite (Limits), el pod puede reiniciarse o eliminarse dependiendo de las reglas de k8s ----
+
+Probes: Prueba o diagnostico que se ejecuta en un contenedor de un pod para ver si esta funcionando correctamente
+Los probes lo ejecuta los kubelet que corre en cada nodo, de tres maneras
+1) Command: 0 Ok, other Not Ok
+2) TCP: Port especific correct response Ok, else Not Ok
+3) Http: 200-399 Ok, 400 => Not Ok
+
+Tipod de Probes:
+A) livenessProbe: (1,2 o 3)
+    - Prueba kubelet en el contenedor cada N intervalo de tiempo, se espera una respuesta del contenedor
+        ejm: get endpoint (/endpoint/v1/...)
+B) readinessProbe: (1,2 o 3)
+    - Prueba kubelet en el contenedor que para cada nuevo contenedor, una vez listo (ready) se attacha al
+    servicio que ya esta corriendo
+        ejm: Se tieen un service con 3 pods, se desea un cuarto pod, este ultimo debera esta listo
+        para ser añadido al services
+C) StartUp: (1,2 o 3)
+    - Prueba kubelet en el contenedor que si esta especificado el livenessProbe y el readinessProbe, 
+    el startup debe estar listo

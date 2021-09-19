@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-demo-envs
+data:
+  env-prod: |
+    HOST_DATA_BASE=10.10.10.10
+    NAME_DATA_BASE=BDTEST123456
+    PORT_DATA_BASE=3306
+    PORT=7000
+    PASSWORD_DATA_BASE="123asdf2342%$#S"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deploy
+  labels:
+    app: app
+  annotations:
+    kubernetes.io/change-cause: "Nuevo Set de Variables"
+    configmap.reloader.stakater.com/reload: "db-demo-envs"
+spec:
+  revisionHistoryLimit: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: app
+        image: app-config:v2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7000
+        volumeMounts:
+          - name: config
+            mountPath: /app/dotenv/config/
+      volumes:
+        - name: config
+          configMap:
+            name: db-demo-envs
+            items:
+              - key: env-prod
+                path: prod.env #Nombre del archivo
+
+# NOTAS: comando para restart el deployment luego de actualizar el configMap
+# $ kubectl rollout restart deployment <name_deployment>

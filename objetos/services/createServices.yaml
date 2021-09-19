@@ -31,7 +31,7 @@ metadata:
   labels:
     app: python
 spec:
-  type: ClusterIp
+  type: ClusterIP
   selector:
     app: python
   ports:

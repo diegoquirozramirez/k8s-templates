@@ -3,9 +3,31 @@ kind: ConfigMap
 metadata:
   name: db-demo-envs
 data:
-  env-prod: |
-    HOST_DATA_BASE=10.10.10.10
+  ENV-DESA: |+
+    #Data Info DB
+    HOST_DATA_BASE=8.8.8.8
+    NAME_DATA_BASE=BDDESA123456
+    PORT_DATA_BASE=3306
+    PASSWORD_DATA_BASE="asdf2342%$#SEXAMPLE"
+    #Data Info Application
+    PORT=7000
+  ENV-TEST: |+
+    #Data Info DB
+    HOST_DATA_BASE=9.9.9.9
     NAME_DATA_BASE=BDTEST123456
     PORT_DATA_BASE=3306
+    PASSWORD_DATA_BASE="123asdf2342%$#SEXAMPLE"
+    #Data Info Application
+    PORT=7000    
+  ENV-PROD: |+
+    #Data Info DB
+    HOST_DATA_BASE=10.10.10.10
+    NAME_DATA_BASE=BDPROD123456
+    PORT_DATA_BASE=3306
+    PASSWORD_DATA_BASE="$#$#$123asdf2342%$#SEXAMPLE"
+    #Data Info Application
     PORT=7000
-    PASSWORD_DATA_BASE="123asdf2342%$#S"
+  PORT: "7000"
+  NODE_ENV_DESA: "desa"
+  NODE_ENV_TEST: "test"
+  NODE_ENV_PROD: "prod"

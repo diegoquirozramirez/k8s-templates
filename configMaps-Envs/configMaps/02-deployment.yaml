@@ -21,20 +21,29 @@ spec:
     spec:
       containers:
       - name: app
-        image: app-config:v2
+        image: app-config:v4
         imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 7000
         volumeMounts:
           - name: config
             mountPath: /app/dotenv/config/
+        env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: db-demo-envs
+                key: PORT
+            name: NODE_ENV
+            valueFrom:
+              configMapKeyRef:
+                name: db-demo-envs
+                key: NODE_ENV_TEST #Dinamico
       volumes:
         - name: config
           configMap:
             name: db-demo-envs
             items:
-              - key: env-prod
-                path: prod.env #Nombre del archivo
+              - key: ENV-TEST #Dinamico
+                path: test.env #Nombre del archivo #Dinamico
 
 # NOTAS: comando para restart el deployment luego de actualizar el configMap
 # $ kubectl rollout restart deployment <name_deployment>

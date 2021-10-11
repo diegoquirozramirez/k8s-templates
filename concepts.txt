@@ -20,3 +20,16 @@ B) readinessProbe: (1,2 o 3)
 C) StartUp: (1,2 o 3)
     - Prueba kubelet en el contenedor que si esta especificado el livenessProbe y el readinessProbe, 
     el startup debe estar listo
+
+
+Volumenes:
+A) StateLessSet
+B) StateFulSet Persistir Data
+    1= EmptyDir
+    2= HostPath
+    3= Cloud Volumes
+
+Tipos Reclaim Policy:
+ - Delete (no es la mejor opcion)
+ - Recycle
+ - Retain

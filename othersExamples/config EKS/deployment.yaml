@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-mock
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      #app.kubernetes.io/name: sawtooth-0
+      app: mock
+  template:
+    metadata:
+      labels:
+        #service: nginx
+        app: mock
+        #app.kubernetes.io/name: sawtooth-0
+    spec:
+      containers:
+      - image: 222522/swg_challenge_code:4.0
+        name: mock
+        ports:
+        - containerPort: 8080
+          #protocol: TCP
+        resources:
+          limits:
+            #cpu: 300m
+            memory: "192Mi"
+          requests:
+            #cpu: "128Mi"
+            memory: "128Mi"
+      #nodeSelector:
+        #instance-type: spot

@@ -14,5 +14,6 @@ spec:
       value: "1.0"
     - name: MODULE
       value: "MOD-001"
-    command: ["echo"]
-    args: ["${VERSION} ${MODULE}"]
+    command: ["/bin/echo"]
+    args: ["$(VERSION)", "$(MODULE)"]
+  restartPolicy: OnFailure

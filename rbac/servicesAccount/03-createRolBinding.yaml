@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: role-binding-diego-monitoring
-  namespace: default
+  namespace: jenkins
 subjects:
 - kind: ServiceAccount
   name: sa-diego

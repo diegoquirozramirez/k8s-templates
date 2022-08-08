@@ -1,12 +1,57 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+    name: nfv
+    labels:
+        name: nfv
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+    name: nfv-svc
+    namespace: nfv
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+    name: nfv-role
+    namespace: nfv
+rules:
+    - apiGroups:
+        - ''
+      resources:
+        - 'pods'
+      verbs:
+        - 'create'
+        - 'delete'
+        - 'get'
+        - 'list'
+        - 'patch'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: nfv-rolebind
+    namespace: nfv
+subjects:
+    - kind: ServiceAccount
+      name: nfv-svc
+      namespace: nfv
+roleRef:
+    kind: Role
+    name: nfv-role
+    apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
 kind: Pod
 metadata:
   labels:
     run: podtest2
   name: podtest2 #nombre del pod
-  namespace: default
+  namespace: nfv
 spec: # qur contenedor se desea crear
+  serviceAccountName: nfv-svc
   containers:
-  - image: httpd:alpine
+  - image: webratio/httpd-with-curl:2.4
     imagePullPolicy: IfNotPresent
     name: cont2 # nombre del contenedor (puede ser dif. nombre del pod)
